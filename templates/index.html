@@ -1,0 +1,42 @@
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages%}
+    <p>{{message}}</p>
+{% endfor %}
+{% endif %}
+{%endwith%}
+
+<form action="/add_contact" method="POST">
+
+    <input type="text" name="fullname" placeholder="Nombre Completo">
+    <input type="text" name="phone" placeholder="Telefono">
+    <input type="text" name="email" placeholder="Correo">
+    <button type="submit">
+        Guardar
+    </button>
+
+</form>
+
+<table>
+    <thead>
+        <tr>
+            <td>Nombre</td>
+            <td>Telefono</td>
+            <td>Correo</td>
+            <td>Operaciones</td>
+        </tr>
+    </thead>
+    <tbody>
+        {%for contact in contacts %}
+            <tr>
+                <td> {{contact.1}} </td>
+                <td> {{contact.2}} </td>
+                <td> {{contact.3}} </td>
+                <td>
+                    <a href="/edit/{{contact.0}}">Editar</a>
+                    <a href="/delete/{{contact.0}}">Eliminar</a>
+                </td>
+            </tr>
+        {%endfor%}
+    </tbody>
+</table>
